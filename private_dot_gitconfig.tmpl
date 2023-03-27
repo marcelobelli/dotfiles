@@ -1,0 +1,17 @@
+[user]
+	name = Marcelo Belli
+	email = marcelo@belli.me
+	signingkey = {{ (onepasswordDetailsFields "tnoqsfcpfabmoc5nsakcyrjh54").public_key.value }}
+
+[core]
+	excludesfile = ~/.gitignore_global
+	autocrlf = input
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+
+[commit]
+	gpgsign = true
