@@ -1,6 +1,6 @@
 [user]
 	name = Marcelo Belli
-	email = marcelo@belli.me
+	email = {{ (onepasswordDetailsFields "Git Info").username.value }}
 	signingkey = {{ (onepasswordDetailsFields "github_key").public_key.value }}
 
 [core]
