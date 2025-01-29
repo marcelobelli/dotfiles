@@ -9,10 +9,13 @@ brew "chezmoi"
 brew "eza"
 brew "fd"
 brew "fish"
+brew "fzf"
+brew "k9s"
 brew "lazygit"
 brew "mas"
 brew "mise"
 brew "neovim"
+brew "postgresql@17"
 brew "ripgrep"
 brew "starship"
 brew "uv"
@@ -20,14 +23,17 @@ brew "wget"
 brew "qmk/qmk/qmk"
 cask "1password"
 cask "1password-cli"
+cask "adguard"
 cask "betterdisplay"
 cask "calibre"
 cask "daisydisk"
-cask "dash@6"
+cask "dash"
 cask "focus"
 cask "fuse-t"
 cask "fuse-t-sshfs"
+cask "ghostty"
 cask "google-chrome"
+cask "google-cloud-sdk"
 cask "iina"
 cask "input-source-pro"
 cask "jordanbaird-ice"
@@ -50,6 +56,7 @@ cask "wezterm"
 cask "whatsapp"
 mas "1Password for Safari", id: 1569813296
 mas "Accelerate", id: 1459809092
+mas "Boop", id: 1518425043
 mas "Dato", id: 1470584107
 mas "Dropover", id: 1355679052
 mas "Keynote", id: 409183694
@@ -58,8 +65,18 @@ mas "Lungo", id: 1263070803
 mas "Maccy", id: 1527619437
 mas "NordVPN", id: 905953485
 mas "Numbers", id: 409203825
+mas "Obsidian Web Clipper", id: 6720708363
+mas "OpenIn", id: 1643649331
 mas "Pages", id: 409201541
 mas "Parcel", id: 639968404
 mas "rcmd", id: 1596283165
 mas "Reeder", id: 1529448980
+mas "Slack", id: 803453959
 mas "The Unarchiver", id: 425424353
+mas "Xcode", id: 497799835
+vscode "dbaeumer.vscode-eslint"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vscode-remote.remote-ssh"
+vscode "ms-vscode-remote.remote-ssh-edit"
+vscode "ms-vscode.remote-explorer"

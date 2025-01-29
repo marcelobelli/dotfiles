@@ -24,6 +24,11 @@ set relativenumber
 Plug 'machakann/vim-highlightedyank'
 " Commentary plugin
 Plug 'tpope/vim-commentary'
+" https://github.com/tpope/vim-surround
+Plug 'tpope/vim-surround'
+" Which-Key Plugin
+set which-key
+set timeoutlen=5000
 
 
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
@@ -47,3 +52,8 @@ map <leader>r <Action>(Vcs.Push)
 "" Jump half page and centralize
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
+
+nmap <S-h> <Action>(PreviousTab)
+nmap <S-l> <Action>(NextTab)
+nmap <C-h> <Action>(PrevSplitter)
+nmap <C-l> <Action>(NextSplitter)
