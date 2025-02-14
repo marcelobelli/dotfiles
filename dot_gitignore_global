@@ -10,3 +10,4 @@
 *.iml
 .mise.toml
 http_my_requests
+.myenv
