@@ -1,0 +1,4 @@
+font-family = "Monolisa"
+theme = catppuccin-frappe
+
+macos-option-as-alt = true
