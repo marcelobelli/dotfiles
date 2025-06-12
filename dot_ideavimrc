@@ -41,8 +41,22 @@ set shortmess=filnxtToOF
 
 " gcc and gc<action> mappings.
 Plug 'tpope/vim-commentary'
-" s action, such as cs"' (replace " with '), ds" (unquote)
+
+" Emulate LazyVim mini.surround mappings
 Plug 'tpope/vim-surround'
+set g:surround_no_mappings = 1
+nmap gsa <Plug>YSurround
+xmap gsa <Plug>VSurround
+nmap gsr <Plug>CSurround
+nmap gsd <Plug>DSurround
+
+" Use s to jump anywhere (similar to flash.nvim in LazyVim)
+set easymotion
+set g:EasyMotion_do_mapping = 0
+nmap s <Plug>(easymotion-s)
+xmap s <Plug>(easymotion-s)
+omap s <Plug>(easymotion-s)
+
 " Enable the whichkey plugin, available on Jetbrains marketplace
 set which-key
 " Extended matching.  A Neovim default plugin.
@@ -75,9 +89,11 @@ nmap <C-Left> <Action>(DecrementWindowWidth)
 nmap <C-Right> <Action>(IncrementWindowWidth)
 " Move Down
 nmap <A-j> <Action>(MoveLineDown)
+vmap <A-j> <Action>(MoveLineDown)
 imap <A-j> <Esc><Action>(MoveLineDown)i
 " Move Up
 nmap <A-k> <Action>(MoveLineUp)
+vmap <A-k> <Action>(MoveLineUp)
 imap <A-k> <Esc><Action>(MoveLineUp)i
 " Prev Buffer
 nmap <S-h> <Action>(PreviousTab)
@@ -109,7 +125,7 @@ nmap gcO O<c-o>gcc
 " Lazy
 nmap <leader>l <Action>(WelcomeScreen.Plugins)
 " New File
-nmap <leader>fn Action(NewElementSamePlace)
+nmap <leader>fn <Action>(NewElementSamePlace)
 " Location List
 nmap <leader>xl <Action>(ActivateProblemsViewToolWindow)
 " Quickfix List
@@ -156,7 +172,7 @@ nmap <leader>uT :echo 'There is no equivalent mapping for Toggle Treesitter High
 " Toggle Background
 nmap <leader>ub <Action>(QuickChangeScheme)
 " Toggle Inlay Hints
-nmap <leader>uh :echo 'There is no equivalent mapping for Toggle Inlay Hints.'<cr>
+nmap <leader>uh <Action>(ToggleInlayHintsGloballyAction)
 " Lazygit (Root Dir)
 nmap <leader>gg <Action>(ActivateCommitToolWindow)
 " Lazygit (cwd)
@@ -246,13 +262,13 @@ nmap <leader>cr <Action>(RenameElement)
 " Source Action
 nmap <leader>cA <Action>(ShowIntentionActions)
 " Next Reference
-nmap ]] <Action>(GotoNextError)
+nmap ]] <Action>(GotoNextElementUnderCaretUsage)
 " Prev Reference
-nmap [[ <Action>(GotoPreviousError)
+nmap [[ <Action>(GotoPrevElementUnderCaretUsage)
 " Next Reference (alternative)
-nmap <a-n> <Action>(GotoNextError)
+nmap <a-n> <Action>(GotoNextElementUnderCaretUsage)
 " Prev Reference (alternative)
-nmap <a-p> <Action>(GotoPreviousError)
+nmap <a-p> <Action>(GotoPrevElementUnderCaretUsage)
 
 " Bufferline
 
@@ -356,13 +372,13 @@ nmap <leader>ss <Action>(GotoSymbol)
 " Goto Symbol (Workspace)
 nmap <leader>sS <Action>(GotoSymbol)
 " Word (Root Dir)
-nmap <leader>sw <Action>(FindWordAtCaret)
+nmap <leader>sw mzviw<Action>(FindInPath)<esc>`z
 " Word (cwd)
-nmap <leader>sW <Action>(FindWordAtCaret)
+nmap <leader>sW mzviw<Action>(FindInPath)<esc>`z
 " Selection (Root Dir)
-vmap <leader>sw <Action>(FindWordAtCaret)
+vmap <leader>sw <Action>(FindInPath)
 " Selection (cwd)
-vmap <leader>sW <Action>(FindWordAtCaret)
+vmap <leader>sW <Action>(FindInPath)
 " Colorscheme with Preview
 nmap <leader>uC <Action>(QuickChangeScheme)
 
@@ -407,17 +423,17 @@ nmap <leader>dw :echo 'There is no equivalent mapping for Widgets.'<cr>
 " Todo-comments Keymaps
 
 " Todo
-nmap <leader>st oTODO<esc>gcc
+nmap <leader>st <Action>(ActivateTODOToolWindow)
 " Todo/Fix/Fixme
-nmap <leader>sT :echo 'Not yet implemented.'<cr>
+nmap <leader>sT <Action>(ActivateTODOToolWindow)
 " Todo (Trouble)
-nmap <leader>xt :echo 'Not yet implemented.'<cr>
+nmap <leader>xt <Action>(ActivateTODOToolWindow)
 " Todo/Fix/Fixme (Trouble)
-nmap <leader>xT :echo 'Not yet implemented.'<cr>
+nmap <leader>xT <Action>(ActivateTODOToolWindow)
 " Previous Todo Comment
-nmap [t ?TODO<cr>
+nmap [t ?\(TODO\|FIX\|HACK\|WARN\|PERF\|NOTE\|TEST\):<cr>
 " Next Todo Comment
-nmap ]t /TODO<cr>
+nmap ]t /\(TODO\|FIX\|HACK\|WARN\|PERF\|NOTE\|TEST\):<cr>
 
 " DAP UI Keymaps
 
@@ -432,25 +448,33 @@ nmap <leader>du <Action>(ActivateDebugToolWindow)
 " Run Last
 nmap <leader>tl <Action>(Run)
 " Show Output
-nmap <leader>to :echo 'Not yet implemented.'<cr>
+nmap <leader>to <Action>(ActivateRunToolWindow)
 " Toggle Output Panel
-nmap <leader>tO :echo 'Not yet implemented.'<cr>
+nmap <leader>tO <Action>(ActivateRunToolWindow)
 " Run Nearest
 nmap <leader>tr <Action>(RunClass)
 " Toggle Summary
-nmap <leader>ts <Action>(ShowTestSummary)
+nmap <leader>ts :echo 'Not yet implmented.'<cr>
 " Stop
 nmap <leader>tS <Action>(Stop)
 " Run File
 nmap <leader>tt <Action>(RunClass)
 " Run All Test Files
-nmap <leader>tT <Action>(RunAllTests)
+nmap <leader>tT :echo 'Not yet implmented.'<cr>
 " Toggle Watch
-nmap <leader>tw <Action>(ToggleTestWatch)
+nmap <leader>tw :echo 'Not yet implmented.'<cr>
 
 " nvim-dap
 " Debug Nearest
 nmap <leader>td <Action>(ChooseDebugConfiguration)
+
+" Buffer Keymaps
+
+" Increment / Decrement Selection
+sethandler <C-Space> n:vim v:vim i:ide
+nmap <C-Space> <Action>(EditorSelectWord)
+vmap <C-Space> <Action>(EditorSelectWord)
+vmap <BS> <Action>(EditorUnSelectWord)
 
 " Neovim mappings
 " https://neovim.io/doc/user/vim_diff.html#_default-mappings
@@ -460,5 +484,10 @@ inoremap <C-U> <C-G>u<C-U>
 inoremap <C-W> <C-G>u<C-W>
 " Q isn't exactly the same.
 nnoremap Q @@
+
+" Keep selection active after indenting in visual mode
+vnoremap > >gv
+vnoremap < <gv
+
 " There are several more Neovim mappings that need to be ported.
 
