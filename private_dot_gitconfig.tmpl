@@ -1,7 +1,7 @@
 [user]
 	name = Marcelo Belli
 	email = {{ (onepasswordDetailsFields "Git Info").username.value }}
-	signingkey = {{ (onepasswordDetailsFields "Github SSH key").public_key.value }}
+	signingkey = {{ (onepasswordDetailsFields "Git SSH key").public_key.value }}
 
 [core]
 	excludesfile = ~/.gitignore_global
